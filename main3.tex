@@ -1,0 +1,214 @@
+\newcommand{\Klasse}{8b}
+\newcommand{\Fach}{Mathematik}
+\newcommand{\Nr}{2}
+\newcommand{\Datum}{14.01.2022}
+\newcommand{\mitlsg}{nein}
+\newcommand{\schreibschrift}{nein}
+
+%\input{praeambel}
+
+
+\documentclass[addpoints,a4paper,ngerman,12pt]{exam}
+\usepackage[ngerman]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=1cm,right=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage{paralist}
+\usepackage{amsfonts, amssymb, amsmath}
+\usepackage{tikz}
+\usetikzlibrary{through,calc}
+
+
+%ExamÜbersetzung
+\pointpoints{Punkt}{Punkte}
+\bonuspointpoints{Bonuspunkt}{Bonuspunkte}
+\renewcommand{\solutiontitle}{\noindent\textbf{Lösung:}\enspace}
+\chqword{Aufgabe}   
+\chpgword{Seite} 
+\chpword{Punkte}   
+\chbpword{Bonus Punkte} 
+\chsword{Erreicht}   
+\chtword{Gesamt}
+\checkboxchar{\Square}
+\checkedchar{\CheckedBox}
+
+\ifthenelse{\equal{\schreibschrift}{ja}}{\newcommand{\schrift}{\usefont{T1}{wela}{m}{n}}}{\newcommand{\schrift}{}}
+
+%ExamHeader
+\ifthenelse{\equal{\mitlsg}{ja}}{\printanswers}{}
+%\printanswers
+\ifthenelse{\equal{\mitlsg}{ja}}{\pagestyle{empty}}{ \pagestyle{headandfoot}} %headandfoot oder empty
+\runningheadrule
+\firstpageheader{\schrift
+Gymnasium Dörpen\\ \Klasse \  - \Fach}{\schrift \hspace*{-4cm} Klassenarbeit Nr. \Nr \\ \hspace*{-4cm} am \Datum }{\schrift Name: \hspace*{70mm}}
+\runningheader{\schrift Seite \thepage \  von \pageref{lastpage}}{\schrift \Fach \ Klassenarbeit Nr. \Nr }{\schrift Initialen:\hspace*{15mm}}
+\firstpagefooter{}{}{\iflastpage{\schrift Viel Erfolg!}{\schrift Bitte umblättern!}}%{\thepage\,/\,\numpages}
+\runningfooter{}{}{\iflastpage{\schrift Viel Erfolg!}{\schrift Bitte umblättern!}}%{\thepage\,/\,\numpages}}
+
+%SchulzDef
+\def\wu#1{\sqrt{{#1}\!\;\,}^{\!\;\!\rule[-.1ex]{.04em}{.5ex}}\;\!}
+%  widetilde : \schl
+\def\schl#1{\ifthenelse{\equal{#1}{i}}{\widetilde{\imath}}{
+		\ifthenelse{\equal{#1}{j}}{\widetilde{\jmath}}{\widetilde{#1}} } } 
+
+%  equations
+\def\be#1{\begin{equation} \label{#1}}  \def\ee{\end{equation}}
+\def\bea#1{\begin{eqnarray} \label{#1}}  \def\eea{\end{eqnarray}} 
+
+%  greek
+\let\a=\alpha   \let\b=\beta   \let\d=\delta  \let\g=\gamma
+\let\l=\lambda  \let\o=\omega  \let\s=\sigma  \let\z=\zeta
+\let\e=\varepsilon  \let\ph=\varphi   \let\ta=\vartheta
+\let\vrho=\varrho   \let\D=\Delta     \let\G=\Gamma  
+\let\L=\Lambda      \let\O=\Omega     \let\Y=\Upsilon
+
+
+%  dotted vectors : \pvc , \ppvc
+\def\pvc#1{{\buildrel {_{\hbox{\,\bf .}}} \over {{\vc #1}}}}
+\def\ppvc#1{{\buildrel {_{\hbox{\,\bf ..}}} \over {{\vc #1}}}}
+
+%  vectors : \vc
+\def\pueb#1#2{\hspace*{-#1mm}{\buildrel{\hspace*{#1mm}
+			\hspace*{#1mm} _\rightharpoonup}\over{#2}}\hspace*{-#1mm}
+	\hspace*{-#1mm}\hspace*{-.2mm}}
+\def\gpueb#1#2{\hspace*{-#1mm}\hspace*{.4mm}{\buildrel{
+			\hspace*{#1mm}\hspace*{#1mm}{\displaystyle _\rightharpoonup}}
+		\over{#2}}\hspace*{-#1mm}\hspace*{-#1mm}\hspace*{.4mm}}
+\def\vc#1{
+	\ifthenelse{\equal{#1}{f} \or \equal{#1}{d}}{\pueb{.4}{#1}}{
+		\ifthenelse{\equal{#1}{e} \or \equal{#1}{k} \or \equal{#1}{l} 
+			\or \equal{#1}{r} \or \equal{#1}{s} \or \equal{#1}{t} 
+			\or \equal{#1}{\b} \or \equal{#1}{\beta} \or \equal{#1}{\ell} 
+			\or \equal{#1}{\phi} \or \equal{#1}{\vrho} 
+			\or \equal{#1}{\varrho}}{\pueb{.2}{#1}}{   
+			\ifthenelse{\equal{#1}{j}}{\pueb{.4}{\jmath}}{
+				\ifthenelse{\equal{#1}{i}}{\pueb{.4}{\imath}}{
+					\ifthenelse{\equal{#1}{m} \or \equal{#1}{w} \or \equal{#1}{\o}
+						\or \equal{#1}{\omega}}{\gpueb{0}{#1}}{
+						\ifthenelse{\equal{#1}{A} \or \equal{#1}{R}}{\gpueb{.2}{#1}}{
+							\ifthenelse{\equal{#1}{B} \or \equal{#1}{C} \or \equal{#1}{D} 
+								\or \equal{#1}{E} \or \equal{#1}{F} \or \equal{#1}{G} \or \equal{#1}{H} 
+								\or \equal{#1}{I} \or \equal{#1}{J} \or \equal{#1}{K} \or \equal{#1}{L} 
+								\or \equal{#1}{M} \or \equal{#1}{N} \or \equal{#1}{O} \or \equal{#1}{P} 
+								\or \equal{#1}{Q} \or \equal{#1}{S} \or \equal{#1}{T} \or \equal{#1}{U} 
+								\or \equal{#1}{V} \or \equal{#1}{W} \or \equal{#1}{X} \or \equal{#1}{Y} 
+								\or \equal{#1}{Z}}{\gpueb{.4}{#1}}{\pueb{0}{#1}}} }}} }} }
+\newcommand{\lsgend}{\end{solutionorgrid}}
+\newcommand{\lsg}[1][1]{\begin{solutionorgrid}[\stretch{#1}]}
+
+%\ifthenelse{\equal{#1}{0}}{\begin{solutionorgrid}[\stretch{3}]}{
+\newcommand{\inputt}[2][1]{\renewcommand{\lsg}[#1][1]{\begin{solutionorgrid}[\stretch{#1}]} \input{#2}}
+	%\ifthenelse{\equal{#1}{0}}{\begin{solutionorgrid}[\stretch{3}]}{
+	\newcommand{\seitenwechsel}{\ifthenelse{\equal{\mitlsg}{ja}}{}{\newpage}}
+	%Längen Hf
+	\newcommand{\cm}{ ~\text{cm}}
+	\newcommand{\m}{ ~\text{m}}
+	\newcommand{\km}{ ~\text{km}}
+\begin{document}
+	\schrift
+	\parindent0cm
+%	\ifprintanswers 	\else 	\makebox[\linewidth]{Name:\enspace \hrulefill\\}	\fi
+	\ifprintanswers 	\else 	\vspace*{-15mm}\hrulefill	\fi
+
+\qformat{ \textbf{Aufgabe \thequestion\ } (\thepoints)\hfill } %Fragennummerierung und Punktangabe	
+
+	\begin{questions}
+\question[8] Löse die folgenden Gleichungen durch Äquivalenzumformungen. Gib jeweils die Lösungsmenge an.\\ Mache \textbf{nur für b und c} die Probe.
+\begin{parts}
+	\part $7x-2=12$
+	\lsg[1]
+\begin{align*}
+7x-2&=12&&|+2\\
+7x&=14&&|:7\\
+x&=2&& \\
+\mathbb{L}&=\{2\}&&
+\end{align*}
+	\lsgend
+	
+	\part $-p-20=-6p-30$ %-28
+	\lsg[1]
+\begin{align*}
+-p-20&=-6p-30&&|+20\\
+-p&=-6p-10&&|+6p\\
+5p&=-10&&|:5\\
+p&=-2&& \\
+\mathbb{L}&=\{-2\}&&
+\end{align*}
+	\lsgend
+	
+	\part $\frac{7}{3}x=14$
+	\lsg[1]
+\begin{align*}
+\frac{7}{3}x&=14&&|: \frac{7}{3}\\
+x&=14\cdot \frac{3}{7}\\
+x&=6&&\\
+\mathbb{L}&=\{6\}&&
+\end{align*}
+	\lsgend
+	
+		\part $\frac{4}{x}=\frac{5}{9}$
+	\lsg[1]
+\begin{align*}
+\frac{4}{x}&=\frac{5}{9}&& \\
+x&=\frac{4\cdot 9}{5}&& \\
+x&=\frac{36}{5}=7,2&& \\
+\mathbb{L}&=\{7,2\}
+\end{align*}
+	\lsgend
+\end{parts}
+\seitenwechsel
+\question[8] Löse die folgenden Gleichungen durch Äquivalenzumformungen. Gib jeweils die Lösungsmenge an.\\ Mache \textbf{nur für b} die Probe.
+\begin{parts}
+	\part $2x-7+4x=3(7+2x)-5$
+	\lsg[1]
+	$\mathbb{L}=\{ \}$
+	\lsgend
+	
+	\part $19+25x-15=19x+22-12x$
+	\lsg[1]
+	$x=1$
+	\lsgend
+	
+	\part $2\cdot 6x+8+2x\cdot 3 = 23x-5x+8$
+	\lsg[1]
+	$\mathbb{L}=\mathbb{Q}$
+	\lsgend
+	
+	\part $(18x-12):(-3)+3=13x-3(3x+5)$
+	\lsg[1]
+\begin{align*}
+%(18x-12):(-3)+3&=13x-3(3x+5) && \\
+-6x+4+3&=13x-9x-15 && \\
+-6x+7&=4x-15 && |+6x+15\\
+22&=10x && |:10 \Longrightarrow 
+%x&=11/ 5=2,2 && \\
+\mathbb{L}=\{ 2,2\} &&
+\end{align*}
+	\lsgend
+\end{parts}
+\seitenwechsel
+\question[5] Stelle für das folgende Altersrätsel eine Gleichung auf und löse das Rätsel:\\
+Alex ist heute doppelt so alt wie seine Schwester Britta. In 11 Jahren werden sie zusammen 46 Jahre alt sein.\\
+Wie alt sind die beiden heute?
+	\lsg[1]
+Britta ist heute 8, Alex 16 Jahre alt.
+\lsgend
+
+\question[5] Stelle für das folgende Zahlenrätsel eine Gleichung auf und löse das Rätsel:\\
+Die Summe dreier aufeinanderfolgender Zahlen ist 186. Wie heißen die drei Zahlen?
+\lsg[1]
+Die Zahlen heißen 61, 62 und 63.
+\lsgend
+\seitenwechsel
+\question[5] Stelle für das folgende Geometrieaufgabe eine Gleichung auf und löse sie:\\
+Ein Rechteck ist halb so breit wie lang. Der Umfang beträgt 48 cm. Wie lang sind die Seiten?
+\lsg[1]
+Die Rechteckseiten sind 8 cm und 16 cm lang.
+\lsgend
+		
+\end{questions}
+\label{lastpage}
+\end{document}
